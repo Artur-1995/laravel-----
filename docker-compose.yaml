@@ -1,0 +1,55 @@
+networks:
+  network2:
+    name: network2
+
+services:
+  nginx2:
+    container_name: nginx2
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./vhost.conf:/etc/nginx/conf.d/default.conf
+      - ./www:/var/www/public_html
+    networks:
+      - network2
+    depends_on:
+      - app-lara2
+      - mysql2
+  
+  app-lara2:
+    container_name: app-lara2
+    # image: app-lara2
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - ./www:/var/www/public_html
+    networks:
+      - network2
+    depends_on:
+      - mysql2
+
+  mysql2:
+    container_name: mysql2
+    image: mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - network2
+
+  phpmyadmin2:
+    container_name: phpmyadmin2
+    image: phpmyadmin
+    environment:
+      - PMA_HOST=mysql2
+    ports:
+      - 1500:80
+    networks:
+      - network2
+    depends_on:
+      - mysql2
