@@ -10,8 +10,8 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./vhost.conf:/etc/nginx/conf.d/default.conf
-      - ./www:/var/www/public_html
+      - ./docker/nginx/conf.d/vhost.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www/html
     networks:
       - network2
     depends_on:
@@ -20,11 +20,10 @@ services:
   
   app-lara2:
     container_name: app-lara2
-    # image: app-lara2
     build:
       dockerfile: Dockerfile
     volumes:
-      - ./www:/var/www/public_html
+      - ./:/var/www/html
     networks:
       - network2
     depends_on:
@@ -36,8 +35,10 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./mysql-data:/var/lib/mysql
+      - ./docker/mysql:/var/lib/mysql
     environment:
+      # MYSQL_DATABASE: laravel
+      # - MYSQL_DATABASE=laravel
       - MYSQL_ROOT_PASSWORD=root
     networks:
       - network2
