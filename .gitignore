@@ -1,5 +1,6 @@
 /node_modules
 /public/hot
+/docker/mysql/
 /public/storage
 /storage/*.key
 /vendor
