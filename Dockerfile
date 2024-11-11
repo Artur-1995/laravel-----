@@ -7,7 +7,6 @@ RUN docker-php-ext-install pdo pdo_mysql && docker-php-ext-enable pdo_mysql
 
 COPY ./ /var/www/html
 COPY --chown=./:html ./ /var/www/html
-# RUN chmod -R 777 /var/www/html
 
 WORKDIR /var/www/html
 
