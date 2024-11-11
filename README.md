@@ -13,7 +13,7 @@
 
 Список команд для выполнения:
 - Запуск окружения докер в фоновом режиме(docker compose up -d)
-- Создать базу данных "laravel", через интерфейс phpMyAdmin(http://localhost:1500/, логин:root пороль:root)
+- Создать базу данных "laravel", через интерфейс phpMyAdmin(http://localhost:1500/, логин: root, пороль: root)
 - Запуск миграций (docker exec app-lara2 php artisan migrate).
 
 Список команд для выполнения:
